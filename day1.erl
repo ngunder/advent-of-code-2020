@@ -2,22 +2,23 @@
 -export([run/0]).
 
 % After saving Christmas five years in a row, you've decided to take a vacation
-% at a nice resort on a tropical island. Surely, Christmas will go on without you.
+% at a nice resort on a tropical island. Surely, Christmas will go on without 
+% you.
 
 % The tropical island has its own currency and is entirely cash-only. The gold 
-% coins used there have a little picture of a starfish; the locals just call them 
-% stars. None of the currency exchanges seem to have heard of them, but somehow, 
-% you'll need to find fifty of these coins by the time you arrive so you can pay 
-% the deposit on your room.
+% coins used there have a little picture of a starfish; the locals just call 
+% them stars. None of the currency exchanges seem to have heard of them, but 
+% somehow, you'll need to find fifty of these coins by the time you arrive so 
+% you can pay the deposit on your room.
 
 % To save your vacation, you need to get all fifty stars by December 25th.
 
-% Collect stars by solving puzzles. Two puzzles will be made available on each day 
-% in the Advent calendar; the second puzzle is unlocked when you complete the first. 
-% Each puzzle grants one star. Good luck!
+% Collect stars by solving puzzles. Two puzzles will be made available on each 
+% day in the Advent calendar; the second puzzle is unlocked when you complete 
+% the first. Each puzzle grants one star. Good luck!
 
-% Before you leave, the Elves in accounting just need you to fix your expense report 
-% (your puzzle input); apparently, something isn't quite adding up.
+% Before you leave, the Elves in accounting just need you to fix your expense 
+% report (your puzzle input); apparently, something isn't quite adding up.
 
 % Specifically, they need you to find the two entries that sum to 2020 and then 
 % multiply those two numbers together.
@@ -30,26 +31,30 @@
 % 299
 % 675
 % 1456
-% In this list, the two entries that sum to 2020 are 1721 and 299. Multiplying them 
-% together produces 1721 * 299 = 514579, so the correct answer is 514579.
+% In this list, the two entries that sum to 2020 are 1721 and 299. Multiplying 
+% them together produces 1721 * 299 = 514579, so the correct answer is 514579.
 
-% Of course, your expense report is much larger. Find the two entries that sum to 2020; 
-% what do you get if you multiply them together?
+% Of course, your expense report is much larger. Find the two entries that sum 
+% to 2020; what do you get if you multiply them together?
 
 % --- Part Two ---
-% The Elves in accounting are thankful for your help; one of them even offers you a 
-% starfish coin they had left over from a past vacation. They offer you a second one 
-% if you can find three numbers in your expense report that meet the same criteria.
+% The Elves in accounting are thankful for your help; one of them even offers 
+% you a starfish coin they had left over from a past vacation. They offer you a 
+% second one if you can find three numbers in your expense report that meet the 
+% same criteria.
 
-% Using the above example again, the three entries that sum to 2020 are 979, 366, and 675. 
-% Multiplying them together produces the answer, 241861950.
+% Using the above example again, the three entries that sum to 2020 are 979, 
+% 366, and 675. Multiplying them together produces the answer, 241861950.
 
-% In your expense report, what is the product of the three entries that sum to 2020?
+% In your expense report, what is the product of the three entries that sum to 
+% 2020?
 
 run() ->
     Input = common:readlines("inputs/day1.txt"),
-    io:format("Part 1: ~w~n", [grab_ints(lists:map(fun binary_to_integer/1, Input), two)]),
-    io:format("Part 2: ~w~n", [grab_ints(lists:map(fun binary_to_integer/1, Input), three)]).
+    common:print_day(1, 
+        grab_ints(lists:map(fun binary_to_integer/1, Input), two)),
+    common:print_day(2, 
+        grab_ints(lists:map(fun binary_to_integer/1, Input), three)).
 
 grab_ints([], _) ->
     no_sum;
@@ -67,7 +72,8 @@ check_sum_2(_Nums, [], two) ->
     no_match;
 check_sum_2({Num1, []}, [Num2|T], three) ->
     check_sum_2({Num1, [Num2|T]}, T, three);
-check_sum_2({Num1, [Num2|_]}, [Num3|_], three) when Num1 + Num2 + Num3 =:= 2020 ->
+check_sum_2({Num1, [Num2|_]}, [Num3|_], three) 
+  when Num1 + Num2 + Num3 =:= 2020 ->
     Num1 * Num2 * Num3;
 check_sum_2(Nums, [_|T], Type) ->
     check_sum_2(Nums, T, Type);
