@@ -1,5 +1,5 @@
 -module(common).
--export([readlines/1, elm_count/2, print_day/2]).
+-export([readlines/1, elm_count/2, print_day/2, better_split/2]).
 
 readlines(Day) ->
     {ok, Bin} = file:read_file(Day),
@@ -18,3 +18,12 @@ elm_count([_|T], Elm, Acc) ->
 
 print_day(Part, Str) ->
     io:format("Part ~w: ~w~n", [Part, Str]).
+
+% Not sure why the lists:split fails on odd lengths, but I will make my own so 
+% it doesn't
+better_split(Where, List) ->
+    better_split(Where, List, []).
+better_split(Where, List,  Acc) when Where =< 0 orelse List =:= []->
+    {lists:reverse(Acc), List};
+better_split(Where, [H|T], Acc) ->
+    better_split(Where-1, T, [H|Acc]).
