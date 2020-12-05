@@ -1,5 +1,6 @@
 -module(common).
--export([readlines/1, elm_count/2, print_day/2, better_split/2]).
+-export([readlines/1, elm_count/2, print_day/2, better_split/2, 
+    is_whole_int/1, is_hex/1, maximum/2]).
 
 readlines(Day) ->
     {ok, Bin} = file:read_file(Day),
@@ -27,3 +28,24 @@ better_split(Where, List,  Acc) when Where =< 0 orelse List =:= []->
     {lists:reverse(Acc), List};
 better_split(Where, [H|T], Acc) ->
     better_split(Where-1, T, [H|Acc]).
+
+is_whole_int(String) ->
+    is_whole_int(String, false).
+is_whole_int([], Result) ->
+    Result;
+is_whole_int([H|T], _Result) when H >= $0 andalso H =< $9->
+    is_whole_int(T, true);
+is_whole_int(_, _) ->
+    false.
+
+is_hex(C) when (C >= $0 andalso C =< $9) orelse (C >= $a andalso C =< $f) ->
+    true;
+is_hex(_) ->
+    false. 
+
+maximum(Max, [H|T]) ->
+    case Max > H of
+        true -> maximum(Max, T);
+        false -> maximum(H, T)
+    end;
+maximum(Max, []) -> Max.
