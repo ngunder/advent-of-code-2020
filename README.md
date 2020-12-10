@@ -1,5 +1,5 @@
 # advent-of-code-2020
-Sorry this was done in Windows 10, so the file input files include \r\n for each newline. If you try this out in linux, you need to accomidate for that.
+Sorry this was done in Windows 10, so the file input files include \r\n for each newline. If you try this out in linux, you need to accommodate for that.
 
 To run, you need erlang : http://erlang.org/
 
