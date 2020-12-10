@@ -1,5 +1,5 @@
 -module(common).
--export([readlines/1, elm_count/2, print_day/2, better_split/2, 
+-export([readlines/1, elm_count/2, print_day/3, better_split/2, 
     is_whole_int/1, is_hex/1, maximum/2]).
 
 readlines(Day) ->
@@ -17,8 +17,8 @@ elm_count([Elm|T], Elm, Acc) ->
 elm_count([_|T], Elm, Acc) ->
     elm_count(T, Elm, Acc).
 
-print_day(Part, Str) ->
-    io:format("Part ~w: ~w~n", [Part, Str]).
+print_day(Day, Part, Str) ->
+    io:format("~p ~p: ~p~n", [Day, Part, Str]).
 
 % Not sure why the lists:split fails on odd lengths, but I will make my own so 
 % it doesn't

@@ -59,10 +59,10 @@
 
 run() ->
     I = common:readlines("inputs/day2.txt"),
-    common:print_day(1, 
+    common:print_day(?MODULE, 1, 
         common:elm_count(parse_input(fun check_if_valid_pass_part1/1, I, []),
         true)),
-    common:print_day(2, 
+    common:print_day(?MODULE, 2, 
         common:elm_count(parse_input(fun check_if_valid_pass_part2/1, I, []),
         true)).
 

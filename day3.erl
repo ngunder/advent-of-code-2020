@@ -94,10 +94,10 @@ run() ->
     Input = common:readlines("inputs/day3.txt"),
     Parsed = parse_input(Input),
     Part1 = process_run(3, 1, Parsed),
-    common:print_day(1, Part1),
+    common:print_day(?MODULE, 1, Part1),
     Part2 = Part1 * process_run(1, 1, Parsed) * process_run(5, 1, Parsed) * 
             process_run(7,1,Parsed) * process_run(1,2,Parsed),
-    common:print_day(2, Part2).
+    common:print_day(?MODULE, 2, Part2).
 
 process_run(Right, Down, Input) ->
     process_run(length(hd(Input)), Right, Down, Input, {0, 0}).

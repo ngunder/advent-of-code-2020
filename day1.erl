@@ -51,9 +51,9 @@
 
 run() ->
     Input = common:readlines("inputs/day1.txt"),
-    common:print_day(1, 
+    common:print_day(?MODULE, 1, 
         grab_ints(lists:map(fun binary_to_integer/1, Input), two)),
-    common:print_day(2, 
+    common:print_day(?MODULE, 2, 
         grab_ints(lists:map(fun binary_to_integer/1, Input), three)).
 
 grab_ints([], _) ->
