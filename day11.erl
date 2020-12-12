@@ -4,7 +4,10 @@
 run() ->
     Data = lists:map(fun binary_to_list/1, common:readlines("inputs/day11.txt")),
     InitalState = make_data_set(Data),
-    common:print_day(?MODULE, 1, do_rounds(part_b, InitalState, 0)).
+    {done, _, ResultA, _, _} = do_rounds(part_a, InitalState, 0),
+    {done, _, ResultB, _, _} = do_rounds(part_b, InitalState, 0),
+    common:print_day(?MODULE, 1, ResultA),
+    common:print_day(?MODULE, 2, ResultB).
 
 
 make_data_set(Data) ->
@@ -28,7 +31,7 @@ do_rounds(Part, SeatTree, Round) ->
         true ->
             {done, Round, check_occupied_count(SeatList, 0), gb_trees:smallest(NewTree), gb_trees:largest(NewTree)};
         false ->
-            io:format("Round ~p~n", [Round+1]),
+            io:format("."),
             do_rounds(Part, NewTree, Round+1)
     end. 
 
