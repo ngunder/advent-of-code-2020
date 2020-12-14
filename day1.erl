@@ -81,4 +81,3 @@ check_sum_2({Num1, [_, Num2|T]}, [], three) ->
     check_sum_2({Num1, [Num2|T]}, T, three);
 check_sum_2({_, _}, [], three) ->
     no_match.
-

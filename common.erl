@@ -1,6 +1,6 @@
 -module(common).
 -export([readlines/1, elm_count/2, print_day/3, better_split/2, 
-    is_whole_int/1, is_hex/1, maximum/2]).
+    is_whole_int/1, is_hex/1, maximum/2, find/2]).
 
 readlines(Day) ->
     {ok, Bin} = file:read_file(Day),
@@ -49,3 +49,12 @@ maximum(Max, [H|T]) ->
         false -> maximum(H, T)
     end;
 maximum(Max, []) -> Max.
+
+find(Elm, List) ->
+    find(Elm, List, 1).
+find(_Elm, [], _) ->
+    not_found;
+find(Elm, [Elm|_], Pos) ->
+    Pos;
+find(Elm, [_|T], Pos) ->
+    find(Elm, T, Pos+1).
